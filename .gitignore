@@ -1,6 +1,8 @@
 .venv
 logs
 
+hide
+
 # for pycache
 __pycache__/
 *.pyc
