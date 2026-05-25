@@ -17,3 +17,15 @@ Todo:
 - [] Improve docs
 - [] Implement storage and instruction hooks 
 - [] Improve logging system, especially step debugging 
+
+
+
+# Development 
+
+The `data` folder conatains some executed blocks (we used [REVM block tracer](https://github.com/bluealloy/revm/tree/main/examples/block_traces)). The data is automatically gzipped on commit to keep the storage low (too lazy to setup lfs). Yout can unzip all with 
+
+```
+gunzip -r data/
+```
+
+It will be zipped back on commit (thanks to a pre-commit hook).
