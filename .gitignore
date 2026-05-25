@@ -1,3 +1,6 @@
+# we gzip the files there
+data/*.json
+
 .venv
 logs
 
