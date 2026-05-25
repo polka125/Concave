@@ -1,0 +1,1255 @@
+1056
+544
+Symbolic data: <BV544 0x489c6d7f0000000000000000000000007ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c000000000000000000000000bc6b3dc17e86c8cacf0f384f2e19468c36154a22>
+Symbolic slice: b'H\x9cm\x7f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00~\xf1\x08\x1e\xcc\x8b[[\x13\x06V\xa4\x1dL\xe4\xf8'
+--------------------------------------------------
+[Step 0000] PC: 00000000 | PUSH1 0x80 | stack_size: 0
+  Ours: []
+  Refs: []
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0001] PC: 00000002 | PUSH1 0x40 | stack_size: 1
+  Ours: ['0x80']
+  Refs: ['0x80']
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0002] PC: 00000004 | MSTORE | stack_size: 2
+  Ours: ['0x80', '0x40']
+  Refs: ['0x80', '0x40']
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0003] PC: 00000005 | PUSH1 0x4 | stack_size: 0
+  Ours: []
+  Refs: []
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0004] PC: 00000007 | CALLDATASIZE | stack_size: 1
+  Ours: ['0x4']
+  Refs: ['0x4']
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0005] PC: 00000008 | LT | stack_size: 2
+  Ours: ['0x4', '0x44']
+  Refs: ['0x4', '0x84']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0006] PC: 00000009 | PUSH2 0x70 | stack_size: 1
+  Ours: ['0x0']
+  Refs: ['0x0']
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0007] PC: 0000000c | JUMPI | stack_size: 2
+  Ours: ['0x0', '0x70']
+  Refs: ['0x0', '0x70']
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0008] PC: 0000000d | PUSH1 0x0 | stack_size: 0
+  Ours: []
+  Refs: []
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0009] PC: 0000000f | CALLDATALOAD | stack_size: 1
+  Ours: ['0x0']
+  Refs: ['0x0']
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0010] PC: 00000010 | PUSH1 0xe0 | stack_size: 1
+  Ours: ['0x489c6d7f0000000000000000000000007ef1081ecc8b5b5b130656a41d4ce4f8']
+  Refs: ['0x7ce2914200000000000000000000000000000000000000000000000055de6a77']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0011] PC: 00000012 | SHR | stack_size: 2
+  Ours: ['0x489c6d7f0000000000000000000000007ef1081ecc8b5b5b130656a41d4ce4f8', '0xe0']
+  Refs: ['0x7ce2914200000000000000000000000000000000000000000000000055de6a77', '0xe0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0012] PC: 00000013 | DUP1 | stack_size: 1
+  Ours: ['0x489c6d7f']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0013] PC: 00000014 | PUSH4 0x92379af7 | stack_size: 2
+  Ours: ['0x489c6d7f', '0x489c6d7f']
+  Refs: ['0x7ce29142', '0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0014] PC: 00000019 | GT | stack_size: 3
+  Ours: ['0x489c6d7f', '0x489c6d7f', '0x92379af7']
+  Refs: ['0x7ce29142', '0x7ce29142', '0x92379af7']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0015] PC: 0000001a | PUSH2 0x4e | stack_size: 2
+  Ours: ['0x489c6d7f', '0x1']
+  Refs: ['0x7ce29142', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0016] PC: 0000001d | JUMPI | stack_size: 3
+  Ours: ['0x489c6d7f', '0x1', '0x4e']
+  Refs: ['0x7ce29142', '0x1', '0x4e']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0017] PC: 0000004e | JUMPDEST | stack_size: 1
+  Ours: ['0x489c6d7f']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0018] PC: 0000004f | DUP1 | stack_size: 1
+  Ours: ['0x489c6d7f']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0019] PC: 00000050 | PUSH4 0x489c6d7f | stack_size: 2
+  Ours: ['0x489c6d7f', '0x489c6d7f']
+  Refs: ['0x7ce29142', '0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0020] PC: 00000055 | EQ | stack_size: 3
+  Ours: ['0x489c6d7f', '0x489c6d7f', '0x489c6d7f']
+  Refs: ['0x7ce29142', '0x7ce29142', '0x489c6d7f']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0021] PC: 00000056 | PUSH2 0x72 | stack_size: 2
+  Ours: ['0x489c6d7f', '0x1']
+  Refs: ['0x7ce29142', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0022] PC: 00000059 | JUMPI | stack_size: 3
+  Ours: ['0x489c6d7f', '0x1', '0x72']
+  Refs: ['0x7ce29142', '0x0', '0x72']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0023] PC: 00000072 | JUMPDEST | stack_size: 1
+  Ours: ['0x489c6d7f']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0024] PC: 00000073 | CALLVALUE | stack_size: 1
+  Ours: ['0x489c6d7f']
+  Refs: ['0x7ce29142', '0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0025] PC: 00000074 | DUP1 | stack_size: 2
+  Ours: ['0x489c6d7f', '0x0']
+  Refs: ['0x7ce29142', '0x7ce29142', '0x5781aa86']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0026] PC: 00000075 | ISZERO | stack_size: 3
+  Ours: ['0x489c6d7f', '0x0', '0x0']
+  Refs: ['0x7ce29142', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0027] PC: 00000076 | PUSH2 0x7e | stack_size: 3
+  Ours: ['0x489c6d7f', '0x0', '0x1']
+  Refs: ['0x7ce29142', '0x0', '0xad']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0028] PC: 00000079 | JUMPI | stack_size: 4
+  Ours: ['0x489c6d7f', '0x0', '0x1', '0x7e']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0029] PC: 0000007e | JUMPDEST | stack_size: 2
+  Ours: ['0x489c6d7f', '0x0']
+  Refs: ['0x7ce29142', '0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0030] PC: 0000007f | POP | stack_size: 2
+  Ours: ['0x489c6d7f', '0x0']
+  Refs: ['0x7ce29142', '0x7ce29142', '0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0031] PC: 00000080 | PUSH2 0x70 | stack_size: 1
+  Ours: ['0x489c6d7f']
+  Refs: ['0x7ce29142', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0032] PC: 00000083 | PUSH1 0x4 | stack_size: 2
+  Ours: ['0x489c6d7f', '0x70']
+  Refs: ['0x7ce29142', '0x1', '0xd7']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0033] PC: 00000085 | DUP1 | stack_size: 3
+  Ours: ['0x489c6d7f', '0x70', '0x4']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0034] PC: 00000086 | CALLDATASIZE | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x4']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0035] PC: 00000087 | SUB | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x4', '0x44']
+  Refs: ['0x7ce29142', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0036] PC: 00000088 | PUSH1 0x40 | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40']
+  Refs: ['0x7ce29142', '0x0', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0037] PC: 0000008a | DUP2 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40', '0x40']
+  Refs: ['0x7ce29142', '0x0', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0038] PC: 0000008b | LT | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40', '0x40', '0x40']
+  Refs: ['0x7ce29142', '0x0', '0x1', '0xe3']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0039] PC: 0000008c | ISZERO | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40', '0x0']
+  Refs: ['0x7ce29142', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0040] PC: 0000008d | PUSH2 0x95 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40', '0x1']
+  Refs: ['0x7ce29142', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0041] PC: 00000090 | JUMPI | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40', '0x1', '0x95']
+  Refs: ['0x7ce29142']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0042] PC: 00000095 | JUMPDEST | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40']
+  Refs: ['0x7ce29142', '0x70']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0043] PC: 00000096 | POP | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x40']
+  Refs: ['0x7ce29142', '0x70', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0044] PC: 00000097 | PUSH1 0x1 | stack_size: 3
+  Ours: ['0x489c6d7f', '0x70', '0x4']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0045] PC: 00000099 | PUSH1 0x1 | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x4', '0x84']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0046] PC: 0000009b | PUSH1 0xa0 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x1', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0047] PC: 0000009d | SHL | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x1', '0x1', '0xa0']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0048] PC: 0000009e | SUB | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0x1', '0x10000000000000000000000000000000000000000']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80', '0x80', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0049] PC: 0000009f | DUP2 | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0xffffffffffffffffffffffffffffffffffffffff']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0050] PC: 000000a0 | CALLDATALOAD | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x4']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0051] PC: 000000a1 | DUP2 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80', '0x1', '0xfa']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0052] PC: 000000a2 | AND | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xffffffffffffffffffffffffffffffffffffffff']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0053] PC: 000000a3 | SWAP2 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0054] PC: 000000a4 | PUSH1 0x20 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xffffffffffffffffffffffffffffffffffffffff', '0x4']
+  Refs: ['0x7ce29142', '0x70', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0055] PC: 000000a6 | ADD | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xffffffffffffffffffffffffffffffffffffffff', '0x4', '0x20']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0056] PC: 000000a7 | CALLDATALOAD | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xffffffffffffffffffffffffffffffffffffffff', '0x24']
+  Refs: ['0x7ce29142', '0x70', '0x4', '0x55de6a779bbac000']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0057] PC: 000000a8 | AND | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xffffffffffffffffffffffffffffffffffffffff', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0058] PC: 000000a9 | PUSH2 0x1c3 | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0059] PC: 000000ac | JUMP | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x1c3']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0x1', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0060] PC: 000001c3 | JUMPDEST | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0x1', '0x1', '0xa0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0061] PC: 000001c4 | CALLER | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0x1', '0x10000000000000000000000000000000000000000']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0062] PC: 000001c5 | PUSH1 0x0 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0xffffffffffffffffffffffffffffffffffffffff']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0063] PC: 000001c7 | SWAP1 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x20']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0064] PC: 000001c8 | DUP2 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x20', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0065] PC: 000001c9 | MSTORE | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0x24']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0066] PC: 000001ca | PUSH1 0x20 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0xffffffffffffffffffffffffffffffffffffffff', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0067] PC: 000001cc | DUP2 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x20']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0x4', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0068] PC: 000001cd | SWAP1 | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x20', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0069] PC: 000001ce | MSTORE | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x0', '0x20']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x4', '0x40']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0070] PC: 000001cf | PUSH1 0x40 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x4', '0x40', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0071] PC: 000001d1 | SWAP1 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x40']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x4', '0x44']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0072] PC: 000001d2 | KECCAK256 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x4', '0x2']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0073] PC: 000001d3 | SLOAD | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0xac39e8317d5abd38bff7ceaa2b75419d4c2a8e44ddff4c1479d767e737aa789c']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0074] PC: 000001d4 | PUSH1 0xff | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x4', '0x60']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0075] PC: 000001d6 | AND | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60', '0xff']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x64']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0076] PC: 000001d7 | DUP1 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0077] PC: 000001d8 | PUSH2 0x1f4 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x3ac']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0078] PC: 000001db | JUMPI | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60', '0x60', '0x1f4']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0079] PC: 000001f4 | JUMPDEST | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0080] PC: 000001f5 | DUP1 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0081] PC: 000001f6 | PUSH2 0x212 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0082] PC: 000001f9 | JUMPI | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60', '0x60', '0x212']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0083] PC: 00000212 | JUMPDEST | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0xed7cfbb8caca87ce8ea6b4bf33288379c70b5210', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0084] PC: 00000213 | PUSH2 0x248 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0085] PC: 00000216 | JUMPI | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x60', '0x248']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0x20']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0086] PC: 00000248 | JUMPDEST | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0x20', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0087] PC: 00000249 | PUSH1 0x40 | stack_size: 4
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0x0', '0x20']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0088] PC: 0000024b | DUP1 | stack_size: 5
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0089] PC: 0000024c | MLOAD | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x40']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0x40']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0090] PC: 0000024d | PUSH4 0x70a08231 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x40', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0091] PC: 00000252 | PUSH1 0xe0 | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x70a08231']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0xac39e8317d5abd38bff7ceaa2b75419d4c2a8e44ddff4c1479d767e737aa789c']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0092] PC: 00000254 | SHL | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x70a08231', '0xe0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0093] PC: 00000255 | DUP2 | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x70a0823100000000000000000000000000000000000000000000000000000000']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1', '0xff']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0094] PC: 00000256 | MSTORE | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x70a0823100000000000000000000000000000000000000000000000000000000', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0095] PC: 00000257 | ADDRESS | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0096] PC: 00000258 | PUSH1 0x4 | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x42d0ba0223700dea8bca7983cc4bf0e000dee772']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1', '0x1', '0x3dd']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0097] PC: 0000025a | DUP3 | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x42d0ba0223700dea8bca7983cc4bf0e000dee772', '0x4']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0098] PC: 0000025b | ADD | stack_size: 9
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x42d0ba0223700dea8bca7983cc4bf0e000dee772', '0x4', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0099] PC: 0000025c | MSTORE | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80', '0x42d0ba0223700dea8bca7983cc4bf0e000dee772', '0x84']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0100] PC: 0000025d | SWAP1 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x40', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1', '0x1', '0x3fb']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0101] PC: 0000025e | MLOAD | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x80', '0x40']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0102] PC: 0000025f | PUSH1 0x0 | stack_size: 6
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0103] PC: 00000261 | SWAP2 | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x80', '0x80', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x1', '0x431']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0104] PC: 00000262 | PUSH1 0x1 | stack_size: 7
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0105] PC: 00000264 | PUSH1 0x1 | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0106] PC: 00000266 | PUSH1 0xa0 | stack_size: 9
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0x1', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0107] PC: 00000268 | SHL | stack_size: 10
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0x1', '0x1', '0xa0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x0', '0x4868e']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0108] PC: 00000269 | SUB | stack_size: 9
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0x1', '0x10000000000000000000000000000000000000000']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0109] PC: 0000026a | DUP6 | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0xffffffffffffffffffffffffffffffffffffffff']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0110] PC: 0000026b | AND | stack_size: 9
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0xffffffffffffffffffffffffffffffffffffffff', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0111] PC: 0000026c | SWAP2 | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x80', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0112] PC: 0000026d | PUSH4 0x70a08231 | stack_size: 8
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0', '0x0', '0x2']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0113] PC: 00000272 | SWAP2 | stack_size: 9
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x80', '0x80', '0x70a08231']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0', '0x0', '0x2', '0x2']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0114] PC: 00000273 | PUSH1 0x24 | stack_size: 9
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0', '0x0', '0x2']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0115] PC: 00000275 | DUP1 | stack_size: 10
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0x80', '0x80', '0x24']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x0', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0116] PC: 00000276 | DUP3 | stack_size: 11
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0x80', '0x80', '0x24', '0x24']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0117] PC: 00000277 | ADD | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0x80', '0x80', '0x24', '0x24', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0118] PC: 00000278 | SWAP3 | stack_size: 11
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0x80', '0x80', '0x24', '0xa4']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0119] PC: 00000279 | PUSH1 0x20 | stack_size: 11
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x80', '0x24', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0120] PC: 0000027b | SWAP3 | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x80', '0x24', '0x80', '0x20']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0121] PC: 0000027c | SWAP1 | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x24', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0122] PC: 0000027d | SWAP2 | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x24', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x1', '0x1']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0123] PC: 0000027e | SWAP1 | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x80', '0x24']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x1', '0x1', '0xa0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0124] PC: 0000027f | DUP3 | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x1', '0x10000000000000000000000000000000000000000']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0125] PC: 00000280 | SWAP1 | stack_size: 13
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0xffffffffffffffffffffffffffffffffffffffff']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0126] PC: 00000281 | SUB | stack_size: 13
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0127] PC: 00000282 | ADD | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0128] PC: 00000283 | DUP2 | stack_size: 11
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x40']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0129] PC: 00000284 | DUP7 | stack_size: 12
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0130] PC: 00000285 | DUP1 | stack_size: 13
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x902f1ac']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0131] PC: 00000286 | EXTCODESIZE | stack_size: 14
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x902f1ac', '0xffffffff']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0132] PC: 00000287 | ISZERO | stack_size: 14
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x902f1ac']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0133] PC: 00000288 | DUP1 | stack_size: 14
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x902f1ac', '0xe0']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0134] PC: 00000289 | ISZERO | stack_size: 15
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x902f1ac00000000000000000000000000000000000000000000000000000000']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0135] PC: 0000028a | PUSH2 0x292 | stack_size: 15
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x902f1ac00000000000000000000000000000000000000000000000000000000', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0136] PC: 0000028d | JUMPI | stack_size: 16
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1', '0x0', '0x292']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0137] PC: 0000028e | PUSH1 0x0 | stack_size: 14
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x80', '0x4']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0138] PC: 00000290 | DUP1 | stack_size: 15
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x84']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 1
+Finished states: 0
+
+--------------------------------------------------
+[Step 0139] PC: 00000291 | REVERT | stack_size: 16
+  Ours: ['0x489c6d7f', '0x70', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0xbc6b3dc17e86c8cacf0f384f2e19468c36154a22', '0x0', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x70a08231', '0xa4', '0x20', '0x80', '0x24', '0x80', '0x7ef1081ecc8b5b5b130656a41d4ce4f89dbbcc8c', '0x1', '0x0', '0x0']
+  Refs: ['0x7ce29142', '0x70', '0x55de6a779bbac000', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x2', '0x2b9a63501617dd26b6', '0x4868e', '0x1', '0x0', '0x0', '0xed643618dd5194f243a8f23c7bd786a37a6dcf8b', '0x902f1ac', '0x84', '0x60']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 0
+Finished states: 1
+
