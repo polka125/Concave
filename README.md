@@ -2,6 +2,35 @@ The project is under development, and is not production ready yet. Once it is te
 
 Currently, a basic stepping and symbolic emulation implemented. However, now we rely on hardcoded memory values, which we get form REVM logs. 
 
+# First Example 
+The simplest thing we can do is just step through the execution.
+
+
+First, need to setup a JSON RPC `WEB3_JSON_RPC`, for example might use the public one:
+
+```bash
+export WEB3_JSON_RPC="https://ethereum-rpc.publicnode.com"
+```
+
+Then run the example:
+
+```python
+from src.concave import Project
+
+p = Project(
+    thing="0x87cb859508438bdab46a9f98900cd245ee6ac4ac81dce4af467b9a2537cbeb18", 
+    debug_trace="data/blocks/25169234/0.json.gz"
+)
+
+
+while len(p.simgr.active) > 0:
+    p.simgr.step()
+    print(f"Active states: {len(p.simgr.active)}")
+    print(f"Finished states: {len(p.simgr.finished)}")
+    print()
+
+```
+
 # Concave
 
 Concave is a concolic execution engine for EVM bytecode, built on top of caripy 
