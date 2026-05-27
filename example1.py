@@ -2,7 +2,7 @@ from src.concave import Project
 
 p = Project(
     thing="0x87cb859508438bdab46a9f98900cd245ee6ac4ac81dce4af467b9a2537cbeb18", 
-    debug_trace="data/blocks/25169234/0.json"
+    debug_trace="data/blocks/25169234/0.json.gz"
 )
 
 
