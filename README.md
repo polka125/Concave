@@ -1,8 +1,12 @@
-The project is under development, and is not production ready yet. Once it is tested, this note will be updated. 
+# Concave
 
-Currently, a basic stepping and symbolic emulation implemented. However, now we rely on hardcoded memory values, which we get form REVM logs. 
+Concave is a concolic execution engine for EVM bytecode, built on top of caripy 
+and taken inspiration from [angr](https://github.com/angr/angr), though we do not aim to neither support all features, nor assume any prior knowledge to be able to use it. 
 
-# First Example 
+The project is under development, has many bugs, but already has some basic functionality. 
+
+
+# [First Example](example1.py)
 The simplest thing we can do is just step through the execution.
 
 
@@ -35,30 +39,82 @@ while len(p.simgr.active) > 0:
 python example1.py > trace.log
 ```
 
-# Concave
-
-Concave is a concolic execution engine for EVM bytecode, built on top of caripy 
-and taken inspiration from [angr](https://github.com/angr/angr), though we do not aim to neither support all features, nor assume any prior knowledge to be able to use it. 
+It steps through the execution, not much symbolic yet, but already something!
 
 
-Todo: 
+# [Second Example](example2.py)
+
+```python
+from src.concave import Project
+import claripy
+
+p = Project(
+    thing="0x87cb859508438bdab46a9f98900cd245ee6ac4ac81dce4af467b9a2537cbeb18", 
+    debug_trace="data/blocks/25169234/0.json.gz"
+)
+
+# top_level_data stored as bytes
+concrete_data = p.top_level_data
+
+# each byte is 8 bits
+symbolic_data = claripy.BVS("input_data", len(concrete_data) * 8) 
+
+# replace the concrete data with symbolic data
+p.set_top_level_data(symbolic_data)
+
+while len(p.simgr.active) > 0:
+    p.simgr.step()
+    print(f"Active states: {len(p.simgr.active)}")
+    print(f"Finished states: {len(p.simgr.finished)}")
+    print()
+```
+Run
+```bash
+python example2.py > trace2.log
+```
+
+Now we can get branching at the JUMPI instruction: based on the symbolic expression we either take or skip the jump 
+
+
+```
+--------------------------------------------------
+[Step 0016] PC: 0000001d | JUMPI | stack_size: 3
+  Ours: ['<BV256 LShR(input_data_0_11040[11039:10784], 0xe0)>', '<BV256 if 0x8da5cb5b > LShR(input_data_0_11040[11039:10784], 0xe0) then 0x1 else 0x0>', '0x8a']
+  Refs: ['0x1a1da075', '0x1', '0x8a']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+>>>>>>>>>>> Forking at JUMPI with symbolic condition: <BV256 if 0x8da5cb5b > LShR(input_data_0_11040[11039:10784], 0xe0) then 0x1 else 0x0>
+Active states: 2
+Finished states: 0
+
+--------------------------------------------------
+[Step 0017] PC: 0000008a | JUMPDEST | stack_size: 1
+  Ours: ['<BV256 LShR(input_data_0_11040[11039:10784], 0xe0)>']
+  Refs: ['0x1a1da075']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+--------------------------------------------------
+[Step 0017] PC: 0000001e | DUP1 | stack_size: 1
+  Ours: ['<BV256 LShR(input_data_0_11040[11039:10784], 0xe0)>']
+  Refs: ['0x1a1da075']
+  >>> STACK MISMATCH DETECTED! <<<
+--------------------------------------------------
+Active states: 2
+Finished states: 0
+```
+
+Moreover you can see the symbolic stack content, which is the slice of the symbolicated input. 
+
+
+
+# TODOs: 
 - [] Add gas tracking 
 - [] Enable serial execution within one block 
 - [] Type 3 transactions 
-- [] Enable JSON-RPC support
+- [] refactor web3 access 
 - [] There are dummy implementations in the Engine, double check, replace with real implementations
-- [] Improve docs
 - [] Implement storage and instruction hooks 
 - [] Improve logging system, especially step debugging 
 
 
 
-# Development 
-
-The `data` folder conatains some executed blocks (we used [REVM block tracer](https://github.com/bluealloy/revm/tree/main/examples/block_traces)). The data is automatically gzipped on commit to keep the storage low (too lazy to setup lfs). Yout can unzip all with 
-
-```
-gunzip -r data/
-```
-
-It will be zipped back on commit (thanks to a pre-commit hook).

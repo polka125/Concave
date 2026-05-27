@@ -1197,7 +1197,6 @@ class Project:
         else:
             self.top_level_code = setup["top_level_code"]
 
-        # 5. Handle debug trace
         self.tx_origin: int = to_int(setup.get("origin", setup["from"]))
         self.debug_trace: Optional[str] = setup.get("debug_trace")
         self.debug_stack: List[Dict[str, Any]] = []
@@ -1237,3 +1236,37 @@ class Project:
         for item in self.debug_stack:
             if 'stack' not in item:
                 item['stack'] = []
+
+    def set_top_level_data(self, data):
+        # todo: ugly ugly ugly, refactor
+        self.top_level_data = data
+        initial_state = EVMState(tx_origin=self.tx_origin, block_time=self.block_time, block_number=self.block_number)
+        
+        initial_frame = Frame(
+            code=self.top_level_code,
+            calldata=self.top_level_data,
+            address=self.top_level_address,
+            caller=self.top_level_caller,
+            value=self.top_level_val,
+            is_static=False
+        )
+        initial_state.push_frame(initial_frame)
+        self.simgr: SimulationManager = SimulationManager(initial_state, self)
+
+
+
+    def dump(self, filepath: str) -> None:
+        setup = {
+            "top_level_data": self.top_level_data.hex(),
+            "top_level_val": hex(self.top_level_val),
+            "from": hex(self.top_level_caller),
+            "to": hex(self.top_level_address) if self.top_level_address else None,
+            "block_number": self.block_number,
+            "block_time": self.block_time,
+            "origin": hex(self.tx_origin),
+            "top_level_code": self.top_level_code.hex(),
+            "debug_trace": self.debug_trace
+        }
+        
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(setup, f, indent=4)
