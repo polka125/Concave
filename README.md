@@ -12,7 +12,7 @@ First, need to setup a JSON RPC `WEB3_JSON_RPC`, for example might use the publi
 export WEB3_JSON_RPC="https://ethereum-rpc.publicnode.com"
 ```
 
-Then run the example:
+Then run the [example](example1.py):
 
 ```python
 from src.concave import Project
@@ -29,6 +29,10 @@ while len(p.simgr.active) > 0:
     print(f"Finished states: {len(p.simgr.finished)}")
     print()
 
+```
+
+```
+python example1.py > trace.log
 ```
 
 # Concave
