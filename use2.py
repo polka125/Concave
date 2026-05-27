@@ -6,11 +6,12 @@ import json
 # retrieve json-rpc endpoint 
 
 json_rpc_endpoint = os.getenv("WEB3_JSON_RPC", "http://localhost:8545")
-
-
 w3 = web3.Web3(web3.HTTPProvider(json_rpc_endpoint))
 
+
 res = w3.is_connected()
+
+
 print(f"Connected to web3: {res}")  
 
 # get the latest block number 

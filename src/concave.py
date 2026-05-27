@@ -1,15 +1,19 @@
-import sys
+import gzip
 import json
 import binascii
 import logging
 from typing import Any, Dict, List, Optional, Tuple
+import os
 
 from thirdparty.pyevmasm.evmasm import disassemble_all
-
 import claripy
-
-
 from data.known_data import address_to_code
+from typing import Union
+
+
+import web3
+json_rpc_endpoint = os.getenv("WEB3_JSON_RPC", "http://localhost:8545")
+w3 = web3.Web3(web3.HTTPProvider(json_rpc_endpoint))
 
 
 # setup logging: 
@@ -119,6 +123,42 @@ def get_slice(data, offset, size) -> claripy.ast.BV | bytes:
 
 
 
+
+def get_storage_rpc(block: int, contract: Union[str, bytes, int], slot: int) -> int:
+    if isinstance(contract, int):
+        contract_hex = f"0x{contract:040x}"
+    elif isinstance(contract, bytes):
+        contract_hex = "0x" + contract.hex()
+    else:
+        contract_hex = contract
+
+    checksum_address = w3.to_checksum_address(contract_hex)
+    storage_data = w3.eth.get_storage_at(checksum_address, slot, block_identifier=block-1)
+    return int.from_bytes(storage_data, byteorder='big')
+
+
+
+from typing import Optional, Union
+
+def get_code_rpc(block: Optional[int], contract: Union[str, bytes, int]) -> bytes:
+    if isinstance(contract, int):
+        contract_hex = f"0x{contract:040x}"
+    elif isinstance(contract, bytes):
+        contract_hex = "0x" + contract.hex()
+    else:
+        contract_hex = contract
+        
+    checksum_address = w3.to_checksum_address(contract_hex)
+    bytecode = bytes(w3.eth.get_code(checksum_address, block_identifier=block))
+    
+    # Handle EIP-7702 Delegation
+    # The bytecode format is 0xef0100 (3 bytes) followed by the 20-byte address
+    if len(bytecode) == 23 and bytecode.startswith(b"\xef\x01\x00"):
+        delegated_address = bytecode[3:23]
+        return get_code_rpc(block, delegated_address)
+        
+    return bytecode
+
 class Frame:
     """Represents an execution context (one call frame)."""
     def __init__(
@@ -159,10 +199,12 @@ class Frame:
 
 class EVMState:
     """Represents the global state of the blockchain and the solver."""
-    def __init__(self, tx_origin: int, block_time: int) -> None:
+    def __init__(self, tx_origin: int, block_time: int, block_number: Optional[int] = None) -> None:
         self.tx_origin: int = tx_origin  
         self.block_time: int = block_time 
         
+        self.block_number: Optional[int] = block_number
+
         self.storage: Dict[Any, Any] = {} 
         self.s_vars: List[Any] = []
         self.constraints: List[Any] = []
@@ -184,7 +226,7 @@ class EVMState:
         return self.call_stack.pop()
 
     def copy(self) -> 'EVMState':
-        new_state = EVMState(self.tx_origin, self.block_time)
+        new_state = EVMState(self.tx_origin, self.block_time, self.block_number)
         new_state.storage = dict(self.storage) 
         new_state.s_vars = list(self.s_vars)
         new_state.constraints = list(self.constraints)
@@ -208,6 +250,21 @@ class Engine:
             return expr.concrete_value, True
         else:
             res = self.stateless_solver.eval(expr, 2)
+            if len(res) == 1:
+                return res[0], True
+        return expr, False
+
+    def try_concretize_with_constraints(self, expr, constraints):
+        "returns (concrete_value, is_concrete)"
+        if isinstance(expr, int) or isinstance(expr, bytes):
+            return expr, True
+        elif isinstance(expr, claripy.ast.BV) and expr.concrete:
+            return expr.concrete_value, True
+        else:
+            solver = claripy.Solver()
+            for c in constraints:
+                solver.add(c)
+            res = solver.eval(expr, 2)
             if len(res) == 1:
                 return res[0], True
         return expr, False
@@ -349,38 +406,6 @@ class Engine:
 
         state.prev_ins = curr_ins
 
-        # Debug Output
-        # formatted_stack = []
-        # for item in current.stack:
-        #     if isinstance(item, claripy.ast.BV) and item.concrete and HIDE_SYMBOLIC_VALS:
-        #         formatted_stack.append(hex(item.concrete_value))
-        #     elif isinstance(item, int):
-        #         formatted_stack.append(hex(item))
-        #     elif isinstance(item, bytes):
-        #         formatted_stack.append("0x" + item.hex())
-        #     else:
-        #         item_concr, resp = self.try_concretize(item)
-        #         if resp and HIDE_SYMBOLIC_VALS:
-        #             formatted_stack.append(hex(item_concr))
-        #         else:
-        #             formatted_stack.append(str(item_concr))
-
-        # indent = "  " * (len(state.call_stack) - 1)
-
-        # if DIFF_MODE:
-        #     s1 = f"{formatted_stack}"
-        #     s2 = f"{project.debug_stack[state.step]['stack'] if state.step < len(project.debug_stack) else 'N/A'}"
-
-        #     print(f"{indent}{s1}")
-        #     print(f"{indent}{s2}")
-        #     if s1 != s2:
-        #         print(f"{indent}>>> Stack mismatch detected!")
-        # else:
-        #     print(f"{indent}   Stack: {formatted_stack}")      
-
-        # op = str(hex(curr_ins.operand)) if curr_ins.operand is not None else ""
-        # print(f"{curr_ins.pc:08x}: {curr_ins.name} {op}; step({state.step}) stack_size({len(current.stack)})")
-
         state.step += 1
 
         # --- OPCODES ---
@@ -390,7 +415,7 @@ class Engine:
         elif curr_ins.name == "ADD":
             a_val = current.stack.pop()
             b_val = current.stack.pop()
-            if is_concrete(a_val) and is_concrete(b_val):
+            if is_concrete(a_val) and is_concrete(b_val): # is_concrete: unbound variable 
                 current.stack.append((get_concrete(a_val) + get_concrete(b_val)) % (2**256))
             else:
                 current.stack.append(a_val + b_val)
@@ -799,7 +824,7 @@ class Engine:
             value = current.stack.pop() & 0xFF
             current.memory[offset] = value
 
-        elif curr_ins.name == "SLOAD":
+        elif curr_ins.name == "OLD_SLOAD": # to delete
             key = current.stack.pop()
             if key in state.storage:
                 current.stack.append(state.storage[key])
@@ -813,6 +838,23 @@ class Engine:
                 current.stack.append(key_debug)
             else:
                 current.stack.append(state.storage.get(key, 0))
+        elif curr_ins.name == "SLOAD":
+            key_expr = current.stack.pop()
+            key_concrete, is_key_concrete = self.try_concretize_with_constraints(key_expr, state.constraints)            
+            if not is_key_concrete:
+                raise ValueError(f"SLOAD error: Storage key could not be concretized. Key expr: {key_expr}")
+
+            if key_concrete in state.storage:
+                value = state.storage[key_concrete]
+            else:
+                contract_address = current.address 
+                block_number = state.block_number
+                if not block_number: 
+                    raise ValueError("SLOAD error: block number is not set")
+
+                value = get_storage_rpc(block_number, contract_address, key_concrete)
+                state.storage[key_concrete] = value                
+            current.stack.append(value)
 
         elif curr_ins.name == "SSTORE":
             key = current.stack.pop()
@@ -920,6 +962,7 @@ class Engine:
             for _ in range(3): current.stack.pop()
             current.stack.append(0x1234567890123456789012345678901234567890)
 
+
         elif curr_ins.name in ("CALL", "CALLCODE", "STATICCALL", "DELEGATECALL"):
             gas = current.stack.pop()
             target_address = current.stack.pop()
@@ -939,7 +982,6 @@ class Engine:
                     print(f">>>>>>>>>>> HAVE SYMBOLIC TARGET ADDRESS: {target_address} THAT BAD")
                     target_address = target_address # Symbolic fallback
 
-                
             call_value = 0
             if curr_ins.name in ("CALL", "CALLCODE"):
                 call_value = current.stack.pop()
@@ -999,12 +1041,16 @@ class Engine:
             else:
                 sub_calldata = bytearray(memory_elements)
 
-
-            target_code = address_to_code.get(target_address, b"")
+            target_code = b""
+            if isinstance(target_address, int):
+                target_code = address_to_code.get(target_address, b"")
+                if target_code == b"": 
+                    target_code = get_code_rpc(state.block_number, target_address)
+                    address_to_code[target_address] = target_code
 
             if current.is_static and call_value > 0:
                 current.stack.append(0)
-            elif target_code:
+            elif target_code != b"":
                 next_pc = current.pc + 1 + curr_ins.operand_size
                 current.return_info = (next_pc, ret_offset, ret_size)
                 
@@ -1021,11 +1067,7 @@ class Engine:
                 state.push_frame(child_frame)
                 auto_increment_pc = False
             else:
-                sub_ret_data = bytearray()
-                state.last_return_data = sub_ret_data
-                write_size = min(ret_size, len(sub_ret_data))
-                for i in range(write_size):
-                    current.memory[ret_offset + i] = sub_ret_data[i]
+                state.last_return_data = bytearray()
                 current.stack.append(1)
 
         elif curr_ins.name in ("RETURN", "REVERT"):
@@ -1086,38 +1128,84 @@ class SimulationManager:
 
 
 class Project: 
-    def __init__(self, setup: Dict[str, Any]) -> None:
+    def __init__(self, thing: Union[Dict[str, Any], str, bytes], debug_trace: Optional[str] = None) -> None:
         def to_int(x):
             if isinstance(x, int): return x
             if isinstance(x, bytes): return int.from_bytes(x, 'big')
+            if isinstance(x, str):
+                if x.startswith("0x"):
+                    return int(x, 16)
+                try:
+                    return int(x, 16)
+                except ValueError:
+                    return int(x)
             return int(x, 16)
 
-        self.code_file: str = setup["code_file"]
-        with open(self.code_file, "r") as f:
-            a: str = f.read()
+        setup = {}
+
+        if isinstance(thing, (str, bytes)):
+            tx_hash = thing
+            if isinstance(tx_hash, bytes):
+                tx_hash = "0x" + tx_hash.hex()
+            elif isinstance(tx_hash, str) and not tx_hash.startswith("0x"):
+                tx_hash = "0x" + tx_hash
+
+            tx = w3.eth.get_transaction(tx_hash)
             
-        self.top_level_code: bytes = binascii.unhexlify(a.strip())
-        self.top_level_data: bytes = setup["top_level_data"]
-        self.top_level_val: int = setup["top_level_val"]
+            block_number = tx['blockNumber']
+            block = w3.eth.get_block(block_number)
+            
+            setup = {
+                "top_level_data": tx['input'], 
+                "top_level_val": tx['value'],
+                "from": tx['from'],
+                "to": tx['to'], # could be None for the contract creation
+                "block_number": block_number,
+                "block_time": block['timestamp'],
+                "debug_trace": debug_trace
+            }
+        elif isinstance(thing, dict):
+            setup = setup_or_tx.copy()
+            if debug_trace is not None:
+                setup["debug_trace"] = debug_trace
+        else:
+            raise ValueError("setup_or_tx must be a transaction hash (str/bytes) or a setup dictionary")
+
+        if isinstance(setup["top_level_data"], str):
+            data_str = setup["top_level_data"]
+            if data_str.startswith("0x"):
+                data_str = data_str[2:]
+            self.top_level_data: bytes = binascii.unhexlify(data_str) if data_str else b""
+        else:
+            self.top_level_data: bytes = setup["top_level_data"]
+
+        self.top_level_val: int = to_int(setup["top_level_val"])
         self.top_level_caller: int = to_int(setup["from"])
         self.top_level_address: int = to_int(setup["to"])
-        self.block_time: int = setup["block_time"]
-        
+        self.block_time: int = to_int(setup["block_time"])
+
+        if "block_number" in setup and setup["block_number"] is not None:
+            self.block_number: Optional[int] = to_int(setup["block_number"])
+        else:
+            self.block_number = None
+
+        if not setup.get("top_level_code"):
+            self.top_level_code = get_code_rpc(self.block_number, self.top_level_address)
+            logger.info(f"Retrieved code for address {hex(self.top_level_address)} at block {self.block_number}, logged to {hex(self.top_level_address)}_{self.block_number}.bin")
+            # with open(f"{hex(self.top_level_address)}_{self.block_number}.bin", "wb") as f:
+            #     f.write(self.top_level_code)
+        else:
+            self.top_level_code = setup["top_level_code"]
+
+        # 5. Handle debug trace
         self.tx_origin: int = to_int(setup.get("origin", setup["from"]))
         self.debug_trace: Optional[str] = setup.get("debug_trace")
         self.debug_stack: List[Dict[str, Any]] = []
 
         if self.debug_trace is not None:
-            with open(self.debug_trace, "r") as f:
-                trace_data: str = f.read()
-            lines: List[str] = trace_data.strip().splitlines()
-            self.debug_stack = [json.loads(line) for line in lines]
-            # append empty stack to json if absent 
-            for item in self.debug_stack:
-                if 'stack' not in item:
-                    item['stack'] = []
+            self.set_debug_trace(self.debug_trace)
 
-        initial_state = EVMState(tx_origin=self.tx_origin, block_time=self.block_time)
+        initial_state = EVMState(tx_origin=self.tx_origin, block_time=self.block_time, block_number=self.block_number)
         
         initial_frame = Frame(
             code=self.top_level_code,
@@ -1131,4 +1219,21 @@ class Project:
 
         self.simgr: SimulationManager = SimulationManager(initial_state, self)
 
+    def set_debug_trace(self, debug_trace: str) -> None:
+        self.debug_trace = debug_trace
+        self.debug_stack = []
+        
+        if self.debug_trace.endswith('.gz'):
+            opener = gzip.open(self.debug_trace, "rt", encoding="utf-8")
+        else:
+            opener = open(self.debug_trace, "r", encoding="utf-8")
 
+        with opener as f:
+            trace_data: str = f.read()
+
+        lines: List[str] = trace_data.strip().splitlines()
+        self.debug_stack = [json.loads(line) for line in lines]
+        
+        for item in self.debug_stack:
+            if 'stack' not in item:
+                item['stack'] = []
