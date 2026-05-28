@@ -4,6 +4,8 @@ logs
 *.log
 
 hide
+db
+
 
 # for pycache
 __pycache__/

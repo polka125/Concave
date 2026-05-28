@@ -106,6 +106,24 @@ Finished states: 0
 Moreover you can see the symbolic stack content, which is the slice of the symbolicated input. 
 
 
+# Batteries 
+We collected a set of over 200'000 contracts which were active in between 24925000 and 25024999 blocks (100'000 blocks). The database of the contracts can be found in the releases. It should be put to the `db` folder.
+
+```bash
+cd db
+wget https://github.com/polka125/Concave/releases/download/batteries/contracts_registry.db.gz
+gunzip contracts_registry.db.gz
+```
+
+The schema is the following:
+
+### Table: `contracts`
+
+| Column Name | Data Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| **`address`** | `TEXT` | `PRIMARY KEY` | The smart contract address. Stored as a lowercase string (e.g., `"0x123...abc"`). |
+| **`bytecode`**| `BLOB` | `NOT NULL` | The compiled smart contract bytecode. Stored as raw binary data  |
+
 
 # TODOs: 
 - [] Add gas tracking 
@@ -115,6 +133,7 @@ Moreover you can see the symbolic stack content, which is the slice of the symbo
 - [] There are dummy implementations in the Engine, double check, replace with real implementations
 - [] Implement storage and instruction hooks 
 - [] Improve logging system, especially step debugging 
-
+- [] sane naming for top_level_code and top_level_data
+- [] Add tests: concrete and symbolic. Concrete can be mined from the blockchain simulations, symbolic can be mined by executing symbolicaly, then binding the actual values and checking the correspondence. 
 
 
