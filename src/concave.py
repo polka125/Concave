@@ -36,7 +36,7 @@ decisions_ptr = 0
 decisions = []
 
 def keccak256(data: bytes) -> bytes:
-    """Pure Python Keccak-256 implementation (unchanged)."""
+    """Pure Python Keccak-256 implementation."""
     rate = 136
     padded = bytearray(data)
     padded.append(0x01)

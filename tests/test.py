@@ -80,3 +80,4 @@ def test_simple_stack_concrete(opcode_name):
         
         expected_stack = [int(x, 16) for x in nxt["stack"]]
         assert simgr.active[0].current_frame.stack == expected_stack
+        
