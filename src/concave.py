@@ -19,6 +19,9 @@ w3 = web3.Web3(web3.HTTPProvider(json_rpc_endpoint))
 # setup logging: 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+logging.getLogger('claripy').setLevel(logging.INFO)
+
+
 
 
 DIFF_MODE = True
@@ -585,14 +588,28 @@ class Engine:
                 current.stack.append(claripy.If(claripy.UGT(a_val, b_val), claripy.BVV(1, 256), claripy.BVV(0, 256)))
 
         elif curr_ins.name == "SLT":
-            a_val = to_signed(current.stack.pop())
-            b_val = to_signed(current.stack.pop())
-            current.stack.append(1 if a_val < b_val else 0)
+            a_val = current.stack.pop()
+            b_val = current.stack.pop()
+            if is_concrete(a_val) and is_concrete(b_val):
+                a_int = to_signed(get_concrete(a_val))
+                b_int = to_signed(get_concrete(b_val))
+                current.stack.append(1 if a_int < b_int else 0)
+            else:
+                a_sym = a_val if isinstance(a_val, claripy.ast.BV) else claripy.BVV(a_val, 256)
+                b_sym = b_val if isinstance(b_val, claripy.ast.BV) else claripy.BVV(b_val, 256)
+                current.stack.append(claripy.If(claripy.SLT(a_sym, b_sym), claripy.BVV(1, 256), claripy.BVV(0, 256)))
 
         elif curr_ins.name == "SGT":
-            a_val = to_signed(current.stack.pop())
-            b_val = to_signed(current.stack.pop())
-            current.stack.append(1 if a_val > b_val else 0)
+            a_val = current.stack.pop()
+            b_val = current.stack.pop()
+            if is_concrete(a_val) and is_concrete(b_val):
+                a_int = to_signed(get_concrete(a_val))
+                b_int = to_signed(get_concrete(b_val))
+                current.stack.append(1 if a_int > b_int else 0)
+            else:
+                a_sym = a_val if isinstance(a_val, claripy.ast.BV) else claripy.BVV(a_val, 256)
+                b_sym = b_val if isinstance(b_val, claripy.ast.BV) else claripy.BVV(b_val, 256)
+                current.stack.append(claripy.If(claripy.SGT(a_sym, b_sym), claripy.BVV(1, 256), claripy.BVV(0, 256)))
 
         elif curr_ins.name == "EQ":
             a_val = current.stack.pop()
@@ -653,11 +670,24 @@ class Engine:
 
         elif curr_ins.name == "SAR":
             shift = current.stack.pop()
-            value = to_signed(current.stack.pop())
-            if shift >= 256:
-                current.stack.append(from_signed(-1 if value < 0 else 0))
+            value = current.stack.pop()
+            if is_concrete(shift) and is_concrete(value):
+                shift_int = get_concrete(shift)
+                val_int = to_signed(get_concrete(value))
+                if shift_int >= 256:
+                    current.stack.append(from_signed(-1 if val_int < 0 else 0))
+                else:
+                    current.stack.append(from_signed(val_int >> shift_int))
             else:
-                current.stack.append(from_signed(value >> shift))
+                shift_sym = shift if isinstance(shift, claripy.ast.BV) else claripy.BVV(shift, 256)
+                val_sym = value if isinstance(value, claripy.ast.BV) else claripy.BVV(value, 256)
+                is_neg = claripy.SLT(val_sym, claripy.BVV(0, 256))
+                sign_extended = claripy.If(is_neg, claripy.BVV(-1, 256), claripy.BVV(0, 256))
+                
+                res = claripy.If(claripy.UGE(shift_sym, claripy.BVV(256, 256)), 
+                                 sign_extended, 
+                                 val_sym >> shift_sym)
+                current.stack.append(res)
 
         elif curr_ins.name in ("SHA3", "KECCAK256"):
             offset = current.stack.pop()
@@ -687,7 +717,11 @@ class Engine:
             offset = current.stack.pop()
             if isinstance(current.calldata, claripy.ast.bv.BV):
 
-                sliced = get_slice(current.calldata, offset, 32)
+                # concretize offset 
+                offset_concr, is_concr = self.try_concretize(offset)
+                if not is_concr:
+                    raise ValueError("Offset for CALLDATALOAD must be concretizable")
+                sliced = get_slice(current.calldata, offset_concr, 32)
                 if isinstance(sliced, bytes):
                     current.stack.append(int.from_bytes(sliced, byteorder='big'))
                 else:
@@ -728,6 +762,7 @@ class Engine:
                     current.memory[destOffset + i] = 0
 
         elif curr_ins.name == "GASPRICE":
+            logger.error("GASPRICE opcode encountered! This should not happen in a stateless analysis context.")
             current.stack.append(20 * 10**9)
 
         elif curr_ins.name == "EXTCODESIZE":
@@ -783,6 +818,7 @@ class Engine:
             current.stack.append(state.block_time)
 
         elif curr_ins.name == "NUMBER":
+            logger.error("NUMBER opcode encountered!")
             current.stack.append(10000000)
 
         elif curr_ins.name in ("PREVRANDAO", "DIFFICULTY"):
@@ -1089,6 +1125,11 @@ class Engine:
         elif curr_ins.name == "SELFDESTRUCT":
             current.stack.pop()
             return self._handle_return(state, 1, bytearray())
+        elif curr_ins.name == "BLOBBASEFEE":
+            raise NotImplementedError(f"{curr_ins.name} is not implemented yet")
+        elif curr_ins.name == "CLZ":
+            raise NotImplementedError(f"{curr_ins.name} is not implemented yet")
+
 
         else:
             # Unknown instruction
@@ -1113,12 +1154,19 @@ class SimulationManager:
         self.active = []
 
         for state in current_active:
-            active, finished = self.engine.succ(state, self.project)
+            try:
+                active, finished = self.engine.succ(state, self.project)
 
-            for s in active:
-                self.active.append(s)
-            for s in finished:
-                self.finished.append(s)
+                for s in active:
+                    self.active.append(s)
+                for s in finished:
+                    self.finished.append(s)
+            except Exception as e:
+                self.finished.append(state)
+                print(f"Error during execution: {e} of state: {state}")
+                logger.error(f"Error during execution: {e}")
+                logger.debug(f"State at error: {state}")
+                continue
 
     def run(self) -> None:
         """Runs the simulation until no active states remain."""
