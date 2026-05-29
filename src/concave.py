@@ -202,7 +202,11 @@ class Frame:
 
 class EVMState:
     """Represents the global state of the blockchain and the solver."""
-    def __init__(self, tx_origin: int, block_time: int, block_number: Optional[int] = None) -> None:
+    def __init__(self, 
+                 tx_origin: int, 
+                 block_time: int, 
+                 block_number: Optional[int] = None,
+                 ) -> None:
         self.tx_origin: int = tx_origin  
         self.block_time: int = block_time 
         
@@ -217,6 +221,8 @@ class EVMState:
         self.step: int = 0
         self.last_return_data: bytearray = bytearray()
         self.success: Optional[int] = None
+
+
 
     @property
     def current_frame(self) -> Optional[Frame]:
@@ -1175,133 +1181,165 @@ class SimulationManager:
 
 
 
-class Project: 
-    def __init__(self, thing: Union[Dict[str, Any], str, bytes], debug_trace: Optional[str] = None) -> None:
-        def to_int(x):
-            if isinstance(x, int): return x
-            if isinstance(x, bytes): return int.from_bytes(x, 'big')
-            if isinstance(x, str):
-                if x.startswith("0x"):
-                    return int(x, 16)
-                try:
-                    return int(x, 16)
-                except ValueError:
-                    return int(x)
+
+def to_int(x: Any) -> int:
+    """Helper function to standardize integer conversion."""
+    if isinstance(x, int): return x
+    if isinstance(x, bytes): return int.from_bytes(x, 'big')
+    if isinstance(x, str):
+        if x.startswith("0x"):
             return int(x, 16)
+        try:
+            return int(x, 16)
+        except ValueError:
+            return int(x)
+    return int(x, 16)
 
-        setup = {}
 
-        if isinstance(thing, (str, bytes)):
-            tx_hash = thing
-            if isinstance(tx_hash, bytes):
-                tx_hash = "0x" + tx_hash.hex()
-            elif isinstance(tx_hash, str) and not tx_hash.startswith("0x"):
-                tx_hash = "0x" + tx_hash
-
-            tx = w3.eth.get_transaction(tx_hash)
-            
-            block_number = tx['blockNumber']
-            block = w3.eth.get_block(block_number)
-            
-            setup = {
-                "top_level_data": tx['input'], 
-                "top_level_val": tx['value'],
-                "from": tx['from'],
-                "to": tx['to'], # could be None for the contract creation
-                "block_number": block_number,
-                "block_time": block['timestamp'],
-                "debug_trace": debug_trace
-            }
-        elif isinstance(thing, dict):
-            setup = setup_or_tx.copy()
-            if debug_trace is not None:
-                setup["debug_trace"] = debug_trace
-        else:
-            raise ValueError("setup_or_tx must be a transaction hash (str/bytes) or a setup dictionary")
-
-        if isinstance(setup["top_level_data"], str):
-            data_str = setup["top_level_data"]
-            if data_str.startswith("0x"):
-                data_str = data_str[2:]
-            self.top_level_data: bytes = binascii.unhexlify(data_str) if data_str else b""
-        else:
-            self.top_level_data: bytes = setup["top_level_data"]
-
-        self.top_level_val: int = to_int(setup["top_level_val"])
-        self.top_level_caller: int = to_int(setup["from"])
-        self.top_level_address: int = to_int(setup["to"])
-        self.block_time: int = to_int(setup["block_time"])
-
-        if "block_number" in setup and setup["block_number"] is not None:
-            self.block_number: Optional[int] = to_int(setup["block_number"])
-        else:
-            self.block_number = None
-
-        if not setup.get("top_level_code"):
-            self.top_level_code = get_code_rpc(self.block_number, self.top_level_address)
-            logger.info(f"Retrieved code for address {hex(self.top_level_address)} at block {self.block_number}, logged to {hex(self.top_level_address)}_{self.block_number}.bin")
-            # with open(f"{hex(self.top_level_address)}_{self.block_number}.bin", "wb") as f:
-            #     f.write(self.top_level_code)
-        else:
-            self.top_level_code = setup["top_level_code"]
-
-        self.tx_origin: int = to_int(setup.get("origin", setup["from"]))
-        self.debug_trace: Optional[str] = setup.get("debug_trace")
+class Project:
+    """
+    Acts as a blueprint for a specific transaction or contract environment.
+    Holds static configuration and spawns clean EVM states on demand.
+    """
+    def __init__(
+        self, 
+        top_level_data: bytes,
+        top_level_code: Optional[bytes], # we might want to supply the code directly
+        top_level_val: int,
+        top_level_caller: int,
+        top_level_address: int,
+        block_time: int,
+        tx_origin: int,
+        block_number: Optional[int] = None,
+        debug_trace: Optional[str] = None,
+        ins_map: Optional[Dict[int, Any]] = None
+    ) -> None:
+        self.top_level_data = top_level_data
+        self.top_level_code = top_level_code
+        self.top_level_val = top_level_val
+        self.top_level_caller = top_level_caller
+        self.top_level_address = top_level_address
+        self.block_time = block_time
+        self.tx_origin = tx_origin
+        self.block_number = block_number
+        self.ins_map = ins_map or {}
+        
+        self.debug_trace = debug_trace
         self.debug_stack: List[Dict[str, Any]] = []
 
         if self.debug_trace is not None:
-            self.set_debug_trace(self.debug_trace)
+            self._load_debug_trace()
 
-        initial_state = EVMState(tx_origin=self.tx_origin, block_time=self.block_time, block_number=self.block_number)
+    @classmethod
+    def from_tx_hash(cls, tx_hash: Union[str, bytes], w3: Any=w3, debug_trace: Optional[str] = None, ins_map: Optional[Dict[int, Any]] = None) -> 'Project':
+        """Factory method to create a Project from a transaction hash via RPC."""
+        if isinstance(tx_hash, bytes):
+            tx_hash = "0x" + tx_hash.hex()
+        elif isinstance(tx_hash, str) and not tx_hash.startswith("0x"):
+            tx_hash = "0x" + tx_hash
+
+        tx = w3.eth.get_transaction(tx_hash)
+        block_number = tx['blockNumber']
+        block = w3.eth.get_block(block_number)
         
-        initial_frame = Frame(
-            code=self.top_level_code,
-            calldata=self.top_level_data,
-            address=self.top_level_address,
-            caller=self.top_level_caller,
-            value=self.top_level_val,
-            is_static=False
-        )
-        initial_state.push_frame(initial_frame)
+        # Note: You'll need to pass your get_code_rpc function or w3 instance here
+        address = to_int(tx['to']) if tx['to'] else 0
+        code = get_code_rpc(block_number, address) # Assuming get_code_rpc is available in scope
+        logger.info(f"Retrieved code for address {hex(address)} at block {block_number}")
 
-        self.simgr: SimulationManager = SimulationManager(initial_state, self)
-
-    def set_debug_trace(self, debug_trace: str) -> None:
-        self.debug_trace = debug_trace
-        self.debug_stack = []
-        
-        if self.debug_trace.endswith('.gz'):
-            opener = gzip.open(self.debug_trace, "rt", encoding="utf-8")
+        raw_input = tx.get('input', b"")
+        if isinstance(raw_input, str):
+            if raw_input.startswith("0x"):
+                raw_input = raw_input[2:]
+            calldata = binascii.unhexlify(raw_input) if raw_input else b""
+        elif isinstance(raw_input, bytes):
+            calldata = bytes(raw_input)  # Converts HexBytes to standard bytes
         else:
-            opener = open(self.debug_trace, "r", encoding="utf-8")
+            calldata = b""
+
+        return cls(
+            top_level_data=calldata,
+            top_level_code=code,
+            top_level_val=to_int(tx['value']),
+            top_level_caller=to_int(tx['from']),
+            top_level_address=address,
+            block_time=to_int(block['timestamp']),
+            tx_origin=to_int(tx['from']), # Usually tx.from is the origin
+            block_number=to_int(block_number),
+            debug_trace=debug_trace,
+            ins_map=ins_map
+        )
+
+    @classmethod
+    def from_dict(cls, setup: Dict[str, Any], debug_trace: Optional[str] = None, ins_map: Optional[Dict[int, Any]] = None) -> 'Project':
+        """Factory method to create a Project from a setup dictionary."""
+        data = setup.get("top_level_data", "")
+        if isinstance(data, str):
+            if data.startswith("0x"): data = data[2:]
+            calldata = binascii.unhexlify(data) if data else b""
+        else:
+            calldata = data
+
+        return cls(
+            top_level_data=calldata,
+            top_level_code=setup["top_level_code"],
+            top_level_val=to_int(setup["top_level_val"]),
+            top_level_caller=to_int(setup["from"]),
+            top_level_address=to_int(setup["to"]),
+            block_time=to_int(setup["block_time"]),
+            tx_origin=to_int(setup.get("origin", setup["from"])),
+            block_number=to_int(setup["block_number"]) if setup.get("block_number") is not None else None,
+            debug_trace=debug_trace or setup.get("debug_trace"),
+            ins_map=ins_map
+        )
+
+    def _load_debug_trace(self) -> None:
+        """Internal method to load and parse the debug trace."""
+        self.debug_stack = []
+        if not self.debug_trace:
+            return
+            
+        opener = gzip.open(self.debug_trace, "rt", encoding="utf-8") if self.debug_trace.endswith('.gz') else open(self.debug_trace, "r", encoding="utf-8")
 
         with opener as f:
-            trace_data: str = f.read()
+            trace_data = f.read()
 
-        lines: List[str] = trace_data.strip().splitlines()
+        lines = trace_data.strip().splitlines()
         self.debug_stack = [json.loads(line) for line in lines]
         
         for item in self.debug_stack:
             if 'stack' not in item:
                 item['stack'] = []
 
-    def set_top_level_data(self, data):
-        # todo: ugly ugly ugly, refactor
-        self.top_level_data = data
-        initial_state = EVMState(tx_origin=self.tx_origin, block_time=self.block_time, block_number=self.block_number)
+    def create_initial_state(self, custom_calldata: Optional[bytes] = None) -> 'EVMState':
+        """
+        Generates a completely clean EVMState based on the project's configuration.
+        Allows overriding calldata easily without mutating the Project itself.
+        """
+        calldata = custom_calldata if custom_calldata is not None else self.top_level_data
+        
+        state = EVMState(
+            tx_origin=self.tx_origin, 
+            block_time=self.block_time, 
+            block_number=self.block_number
+        )
         
         initial_frame = Frame(
             code=self.top_level_code,
-            calldata=self.top_level_data,
+            calldata=calldata,
             address=self.top_level_address,
             caller=self.top_level_caller,
             value=self.top_level_val,
-            is_static=False
+            is_static=False,
+            ins_map=self.ins_map
         )
-        initial_state.push_frame(initial_frame)
-        self.simgr: SimulationManager = SimulationManager(initial_state, self)
+        state.push_frame(initial_frame)
+        return state
 
-
+    def create_simgr(self, custom_calldata: Optional[bytes] = None) -> 'SimulationManager':
+        """Convenience method to spawn a new SimulationManager with a clean state."""
+        state = self.create_initial_state(custom_calldata)
+        return SimulationManager(state, self)
 
     def dump(self, filepath: str) -> None:
         setup = {
@@ -1318,3 +1356,41 @@ class Project:
         
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(setup, f, indent=4)
+
+
+class Frame:
+    """Represents an execution context (one call frame)."""
+    def __init__(
+        self, 
+        code: bytes, 
+        calldata: bytes, 
+        address: int, 
+        caller: int, 
+        value: int, 
+        is_static: bool, 
+        ins_map: Optional[Dict[int, Any]] = None, 
+        return_info: Optional[Tuple[int, int, int]] = None
+    ) -> None:
+        self.pc: int = 0
+        self.stack: List[Any] = []
+        self.memory: Dict[int, Any] = {}
+        
+        self.code: bytes = code
+        self.calldata: bytes = calldata
+        self.address: int = address      
+        self.caller: int = caller        
+        self.value: int = value          
+        
+        self.is_static: bool = is_static
+        self.ins_map: Dict[int, Any] = ins_map or {}
+        self.return_info: Optional[Tuple[int, int, int]] = return_info
+
+    def copy(self) -> 'Frame':
+        new_frame = Frame(
+            self.code, self.calldata, self.address, self.caller, 
+            self.value, self.is_static, self.ins_map, self.return_info
+        )
+        new_frame.pc = self.pc
+        new_frame.stack = list(self.stack)
+        new_frame.memory = dict(self.memory)
+        return new_frame

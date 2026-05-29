@@ -21,16 +21,15 @@ Then run the [example](example1.py):
 ```python
 from src.concave import Project
 
-p = Project(
-    thing="0x87cb859508438bdab46a9f98900cd245ee6ac4ac81dce4af467b9a2537cbeb18", 
+p = Project.from_tx_hash(
+    "0x87cb859508438bdab46a9f98900cd245ee6ac4ac81dce4af467b9a2537cbeb18", 
     debug_trace="data/blocks/25169234/0.json.gz"
 )
-
-
-while len(p.simgr.active) > 0:
-    p.simgr.step()
-    print(f"Active states: {len(p.simgr.active)}")
-    print(f"Finished states: {len(p.simgr.finished)}")
+s = p.create_simgr()
+while len(s.active) > 0:
+    s.step()
+    print(f"Active states: {len(s.active)}")
+    print(f"Finished states: {len(s.finished)}")
     print()
 
 ```
@@ -123,6 +122,29 @@ The schema is the following:
 | :--- | :--- | :--- | :--- |
 | **`address`** | `TEXT` | `PRIMARY KEY` | The smart contract address. Stored as a lowercase string (e.g., `"0x123...abc"`). |
 | **`bytecode`**| `BLOB` | `NOT NULL` | The compiled smart contract bytecode. Stored as raw binary data  |
+
+
+# Tests
+
+## Unit tests
+
+### Concrete tests
+For tests we use revm traces as ground truth, which split into bins based on opcodes. The pairs (pre-state, post-state) could be fround at `testdata`
+the tests can be run with 
+```bash
+pytest tests/test.py -v
+```
+
+Currently uncovered opcodes are: 
+```
+Uncovered opcodes (55): ADDRESS, BALANCE, BASEFEE, BLOBBASEFEE, BLOBHASH, BLOCKHASH, CALL, CALLDATACOPY, CALLDATALOAD, CALLDATASIZE, CALLER, CALLVALUE, CHAINID, CLZ, CODECOPY, CODESIZE, COINBASE, CREATE, CREATE2, DELEGATECALL, DIFFICULTY, EXTCODECOPY, EXTCODEHASH, EXTCODESIZE, GAS, GASPRICE, INVALID, JUMP, JUMPDEST, JUMPI, KECCAK256, LOG0, LOG1, LOG2, LOG3, LOG4, MCOPY, MLOAD, MSTORE, MSTORE8, NUMBER, ORIGIN, RETURN, RETURNDATACOPY, RETURNDATASIZE, REVERT, SELFBALANCE, SELFDESTRUCT, SLOAD, SSTORE, STATICCALL, STOP, TIMESTAMP, TLOAD, TSTORE
+```
+
+### Symbolic tests 
+Not done yet, but the idea is to replace stack with sybolic values, make one symbolic step, concretize the pre-state variables, evaluate the results and check the correspondence with the post-state. TODO!
+
+## Integration tests
+Need to execute the whole block, and check with the trace. TODO!
 
 
 # TODOs: 

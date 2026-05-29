@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "claripy>=9.2.217",
+    "pytest>=9.0.3",
     "tqdm>=4.67.3",
     "web3>=7.16.0",
 ]
