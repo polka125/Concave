@@ -66,7 +66,7 @@ SIMPLE_STACK_OPCODES = [
     # Comparisons
     "LT", "GT", "SLT", "SGT", "EQ", "ISZERO",
     # Basic Stack Operations
-    "POP", "PUSH0", 
+    "POP", "PUSH0",
     # "CLZ" #todo
 ] + [f"DUP{i}" for i in range(1, 17)] + [f"SWAP{i}" for i in range(1, 17)]
 

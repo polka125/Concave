@@ -827,7 +827,8 @@ class Engine:
             logger.error("NUMBER opcode encountered!")
             current.stack.append(10000000)
 
-        elif curr_ins.name in ("PREVRANDAO", "DIFFICULTY"):
+        elif curr_ins.name in ("DIFFICULTY", "PREVRANDAO"):
+            # If you are hardcoding for tests, use the expected mock value
             current.stack.append(0x445566)
 
         elif curr_ins.name == "GASLIMIT":
